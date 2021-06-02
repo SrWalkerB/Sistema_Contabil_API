@@ -46,7 +46,7 @@ export default new class CreateAccountingSystemControllers {
       idAddress: address.idAddress
     }
 
-    /* await AccountingOfficeUsersRepository
+    await AccountingOfficeUsersRepository
       .store({
         idUser: officeUsers.idUser,
         name: officeUsers.name,
@@ -54,9 +54,9 @@ export default new class CreateAccountingSystemControllers {
         email: officeUsers.email,
         password: officeUsers.password,
         type: officeUsers.type
-      }) */
+      })
 
-    /* await AddressDataRepository
+    await AddressDataRepository
       .store({
         idAddress: address.idAddress,
         cep: address.cep,
@@ -66,33 +66,33 @@ export default new class CreateAccountingSystemControllers {
         number: address.number,
         road: address.road,
         state: address.state
-      }) */
-
-    await CompanyDataRepository
-      .store({
-        idCompany: company.idCompany,
-        name: company.name,
-        cnpj: company.cnpj,
-        idResponsible: company.idReponsible,
-        idAddress: company.idAddress
       })
 
-    /* await OwnerDataRepository
+    await OwnerDataRepository
       .store({
         idOwner: owner.idOwner,
         idEmail: owner.idEmail,
         cpf: owner.cpf,
         idAddress: owner.idAddress,
         plane: owner.plane
-      }) */
+      })
+
+    await CompanyDataRepository
+      .store({
+        idCompany: company.idCompany,
+        name: company.name,
+        cnpj: company.cnpj,
+        idResponsible: officeUsers.idUser,
+        idAddress: company.idAddress
+      })
 
     return {
       message: 'success',
       body: [
         officeUsers,
         address,
-        company,
-        owner
+        owner,
+        company
       ]
     }
   }
