@@ -1,4 +1,4 @@
-import dbActions from '../connect'
+import dbActions from '../infra/connect'
 
 export default new class AccountingOfficeUsers {
   async index () {

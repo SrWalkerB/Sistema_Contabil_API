@@ -1,11 +1,11 @@
 import dotenv from 'dotenv'
 import express from 'express'
-import authRoutes from './routes/authRoutes'
+import usersAccountingSystemRoutes from './routes/usersAccountingSystem'
 
 dotenv.config()
 
 const app = express()
 
-app.use('/auth', authRoutes)
+app.use('/user', usersAccountingSystemRoutes)
 
 export default app
