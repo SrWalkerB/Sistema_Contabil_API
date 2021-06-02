@@ -21,9 +21,10 @@ services:
         volumes: 
             - .:/usr/src/app
         working_dir: /usr/src/app
-        command: 
-            - npx knex migrate:latest
-            - npm start
+        command: >
+                bash -c "npm install && 
+                npx knex migrate:latest && 
+                npm run dev"
 
 
     
