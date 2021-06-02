@@ -19,6 +19,9 @@ export async function up (knex: Knex): Promise<void> {
     table.string('district', 20)
       .notNullable()
 
+    table.string('city', 30)
+      .notNullable()
+
     table.string('state', 25)
       .notNullable()
 
