@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import CreateAccountingSystemControllers from '../useCases/CreateAccountingSystemUsers/CreateAccountingSystemControllers'
 
 export default new class AccountingSystemUsers {
-  store (req: Request, resp: Response) {
+  async store (req: Request, resp: Response) {
     try {
       const {
         nameClient,
@@ -22,13 +22,14 @@ export default new class AccountingSystemUsers {
         country
       } = req.body
 
-      const createAccount = CreateAccountingSystemControllers.store({
+      const createAccount = await CreateAccountingSystemControllers.store({
         createAccountingClient: {
           cpf,
+          username,
           email,
           name: nameClient,
           password,
-          username
+          plane
         },
         createAccountingCompany: {
           cnpj,
@@ -46,7 +47,7 @@ export default new class AccountingSystemUsers {
         }
       })
 
-      return resp.status(201).json({ message: createAccount.message })
+      return resp.status(201).json(createAccount)
     } catch (error) {
       console.log(error)
       return resp.status(500).json({ message: 'error not expect' })

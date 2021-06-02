@@ -3,7 +3,7 @@ interface ICreateAddress {
     idAddress: string,
     cep: number,
     road: string,
-    number: number,
+    number: string,
     district: string,
     city: string,
     state: string,

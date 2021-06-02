@@ -1,6 +1,7 @@
 interface ICreateAccountingSystemClient{
     name: string,
     username: string,
+    plane: string,
     cpf: number,
     email: string,
     password: string
