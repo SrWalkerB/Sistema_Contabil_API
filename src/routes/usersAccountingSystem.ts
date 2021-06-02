@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import CreateAccountingSystemControllers from '../useCases/CreateAccountingSystemUsers/CreateAccountingSystemControllers'
+import AccountingSystemUsers from '../implementations/AccountingSystemUsers'
 
 const usersAccountingSystemRoutes = Router()
 
-usersAccountingSystemRoutes.post('/', CreateAccountingSystemControllers.store)
+usersAccountingSystemRoutes.post('/', AccountingSystemUsers.store)
 
 export default usersAccountingSystemRoutes
