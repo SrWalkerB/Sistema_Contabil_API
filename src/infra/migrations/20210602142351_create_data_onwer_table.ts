@@ -5,12 +5,15 @@ export async function up (knex: Knex): Promise<void> {
   return await dbActions.schema.createTableIfNotExists('data_onwer', table => {
     table.string('id_onwer')
       .primary()
+      .references('id_user')
+      .inTable('accounting_office_users')
       .notNullable()
 
     table.string('id_email')
       .references('email')
       .inTable('accounting_office_users')
       .notNullable()
+      .onDelete('CASCADE')
 
     table.integer('cpf', 11)
       .unique()
@@ -20,6 +23,7 @@ export async function up (knex: Knex): Promise<void> {
       .references('id_address')
       .inTable('address')
       .notNullable()
+      .onDelete('CASCADE')
 
     table.string('plane', 15)
       .notNullable()
