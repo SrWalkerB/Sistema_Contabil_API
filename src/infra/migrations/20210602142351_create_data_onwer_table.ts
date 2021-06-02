@@ -2,8 +2,8 @@ import { Knex } from 'knex'
 import dbActions from '../connect'
 
 export async function up (knex: Knex): Promise<void> {
-  return await dbActions.schema.createTableIfNotExists('data_onwer', table => {
-    table.string('id_onwer')
+  return await dbActions.schema.createTableIfNotExists('data_owner', table => {
+    table.string('id_owner')
       .primary()
       .references('id_user')
       .inTable('accounting_office_users')
