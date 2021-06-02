@@ -15,8 +15,8 @@ export async function up (knex: Knex): Promise<void> {
       .notNullable()
 
     table.string('id_responsible')
-      .references('id_onwer')
-      .inTable('data_onwer')
+      .references('id_owner')
+      .inTable('data_owner')
       .notNullable()
       .onDelete('CASCADE')
 
