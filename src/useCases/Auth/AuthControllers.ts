@@ -1,4 +1,5 @@
 import Cryptografia from '../../helpers/Cryptografia'
+import TokenOptions from '../../helpers/TokenOptions'
 import AccountingOfficeUsersRepository from '../../repositories/AccountingOfficeUsersData/AccountingOfficeUsersRepository'
 
 export default new class LoginSystemControllers {
@@ -9,13 +10,14 @@ export default new class LoginSystemControllers {
       return { message: 'user not found' }
     }
 
-    const [{ password: passwordHash }] = searchUser
+    const [{ password: passwordHash, id_user: idUser }] = searchUser
     const validatePassword = Cryptografia.compareHash(password, passwordHash)
 
     if (!validatePassword) {
       return { message: 'user not found' }
     }
 
-    return { message: 'success', body: searchUser }
+    const token = TokenOptions.genereteToken(idUser)
+    return { message: 'success', token: token }
   }
 }()
