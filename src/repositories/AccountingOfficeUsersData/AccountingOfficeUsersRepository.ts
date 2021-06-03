@@ -13,9 +13,10 @@ export default new class AccountingOfficeUsers {
     })
   }
 
-  async findUser (email: string, password: string) {
+  async findMailPassword (email: string) {
     return await dbActions('accounting_office_users')
       .where('email', email)
-      .where('password', password)
+      .select('id_user')
+      .select('password')
   }
 }()

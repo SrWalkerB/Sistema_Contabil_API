@@ -12,7 +12,7 @@ export default new class AccountingSystemUsers {
         return resp.status(404).json({ message: auth.message })
       }
 
-      return resp.status(200).json({ message: auth.message })
+      return resp.status(200).json(auth)
     } catch (error) {
       console.log(error)
       return resp.status(500).json({ message: 'err not expect' })
