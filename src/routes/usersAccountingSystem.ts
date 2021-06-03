@@ -7,9 +7,12 @@ import {
 
 const usersAccountingSystemRoutes = Router()
 
+usersAccountingSystemRoutes.post('/auth', AccountingSystemUsers.login)
+
 usersAccountingSystemRoutes.post('/',
   ValidorCreateAccountingSystemUsers(),
   ValidatorErrosCreateAccountingSystemUsers,
-  AccountingSystemUsers.store)
+  AccountingSystemUsers.store
+)
 
 export default usersAccountingSystemRoutes
