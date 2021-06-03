@@ -16,6 +16,7 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-validator": "^6.11.1",
+    "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.6",
     "pg": "^8.6.0",
     "uuid": "^8.3.2"
@@ -24,6 +25,7 @@
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.10",
     "@types/express": "^4.17.12",
+    "@types/jsonwebtoken": "^8.5.1",
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.0",
