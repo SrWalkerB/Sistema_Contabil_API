@@ -15,7 +15,7 @@ export async function up (knex: Knex): Promise<void> {
       .notNullable()
       .onDelete('CASCADE')
 
-    table.integer('cpf', 11)
+    table.bigInteger('cpf')
       .unique()
       .notNullable()
 

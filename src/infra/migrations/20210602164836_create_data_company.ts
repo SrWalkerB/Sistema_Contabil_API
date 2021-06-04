@@ -10,7 +10,7 @@ export async function up (knex: Knex): Promise<void> {
     table.string('name', 60)
       .notNullable()
 
-    table.integer('cnpj', 11)
+    table.bigInteger('cnpj')
       .unique()
       .notNullable()
 
