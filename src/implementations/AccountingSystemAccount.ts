@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import AuthControllers from '../useCases/Auth/AuthControllers'
-import CreateAccountingSystemControllers from '../useCases/CreateAccountingSystemUsers/CreateAccountingSystemControllers'
+import CreateAccountingSystemControllers from '../useCases/CreateAccountingSystemAccount/CreateAccountingSystemControllers'
 
 export default new class AccountingSystemUsers {
   async login (req: Request, resp: Response) {

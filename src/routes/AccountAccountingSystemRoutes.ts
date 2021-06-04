@@ -1,9 +1,9 @@
 import { Router } from 'express'
-import AccountingSystemUsers from '../implementations/AccountingSystemUsers'
+import AccountingSystemUsers from '../implementations/AccountingSystemAccount'
 import {
   ValidorCreateAccountingSystemUsers,
   ValidatorErrosCreateAccountingSystemUsers
-} from '../useCases/CreateAccountingSystemUsers/ValidatorCreateAccountingSystemUsers'
+} from '../useCases/CreateAccountingSystemAccount/ValidatorCreateAccountingSystemUsers'
 
 import { validatorAuth, validatorAuthErros } from '../useCases/Auth/ValidatorAuth'
 
