@@ -11,7 +11,7 @@ export default new class TokenOptions {
         return { message: 'invalid token' }
       }
 
-      return { message: 'success', body: token }
+      return { message: 'success', body: data }
     })
   }
 

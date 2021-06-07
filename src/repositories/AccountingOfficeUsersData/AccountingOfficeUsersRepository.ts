@@ -13,6 +13,15 @@ export default new class AccountingOfficeUsers {
     })
   }
 
+  async findUserID (idUser: string) {
+    return await
+    dbActions('accounting_office_users')
+      .where('id_user', idUser)
+      .join('data_company', 'accounting_office_users.id_user', 'data_company.id_responsible')
+      .join('address', 'data_company.id_address', 'address.id_address')
+      .join('data_owner', 'accounting_office_users.id_user', 'data_owner.id_owner')
+  }
+
   async findMailPassword (email: string) {
     return await dbActions('accounting_office_users')
       .where('email', email)
