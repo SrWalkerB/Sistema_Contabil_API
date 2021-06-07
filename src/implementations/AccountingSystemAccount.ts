@@ -1,7 +1,24 @@
 import { Request, Response } from 'express'
-import CreateAccountingSystemControllers from '../useCases/CreateAccountingSystemUsers/CreateAccountingSystemControllers'
+import AuthControllers from '../useCases/Auth/AuthControllers'
+import CreateAccountingSystemControllers from '../useCases/CreateAccountingSystemAccount/CreateAccountingSystemControllers'
 
 export default new class AccountingSystemUsers {
+  async login (req: Request, resp: Response) {
+    try {
+      const { email, password } = req.body
+      const auth = await AuthControllers.auth(email, password)
+
+      if (auth.message !== 'success') {
+        return resp.status(404).json({ message: auth.message })
+      }
+
+      return resp.status(200).json(auth)
+    } catch (error) {
+      console.log(error)
+      return resp.status(500).json({ message: 'err not expect' })
+    }
+  }
+
   async store (req: Request, resp: Response) {
     try {
       const {
