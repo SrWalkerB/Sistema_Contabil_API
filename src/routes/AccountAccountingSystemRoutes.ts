@@ -6,7 +6,7 @@ import {
 } from '../useCases/CreateAccountingSystemAccount/ValidatorCreateAccountingSystemUsers'
 
 import { validatorAuth, validatorAuthErros } from '../useCases/Auth/ValidatorAuth'
-import MyProfile from '../implementations/MyProfile'
+import MyProfileAccount from '../implementations/MyProfileAccount'
 
 const usersAccountingSystemRoutes = Router()
 
@@ -23,6 +23,6 @@ usersAccountingSystemRoutes
     AccountingSystemUsers.store
   )
 
-usersAccountingSystemRoutes.get('/profile', MyProfile.index)
+usersAccountingSystemRoutes.get('/profile', MyProfileAccount.index)
 
 export default usersAccountingSystemRoutes
