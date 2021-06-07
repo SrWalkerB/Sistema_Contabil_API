@@ -7,6 +7,7 @@ import {
 
 import { validatorAuth, validatorAuthErros } from '../useCases/Auth/ValidatorAuth'
 import MyProfileAccount from '../implementations/MyProfileAccount'
+import { verifyUserMiddlware } from '../helpers/middlewares/VerifyUsersMiddlware'
 
 const usersAccountingSystemRoutes = Router()
 
@@ -23,6 +24,9 @@ usersAccountingSystemRoutes
     AccountingSystemUsers.store
   )
 
-usersAccountingSystemRoutes.get('/profile', MyProfileAccount.index)
+usersAccountingSystemRoutes
+  .get('/profile',
+    verifyUserMiddlware,
+    MyProfileAccount.index)
 
 export default usersAccountingSystemRoutes
