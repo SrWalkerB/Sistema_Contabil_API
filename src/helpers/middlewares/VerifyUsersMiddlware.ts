@@ -4,6 +4,8 @@ import TokenOptions from '../TokenOptions'
 
 const verifyUserMiddlware = async (req: Request, resp: Response, next: NextFunction) => {
   const token = TokenOptions.getToken(req)
+  if (!token) return resp.status(401).send()
+
   const { body: { data: idUser } } = TokenOptions.verifyToken(token!)
   const seachId = await AccountingOfficeUsersRepository.findVerifyID(idUser)
 
