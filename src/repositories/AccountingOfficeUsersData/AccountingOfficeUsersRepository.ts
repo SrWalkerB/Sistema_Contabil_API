@@ -22,6 +22,13 @@ export default new class AccountingOfficeUsers {
       .join('data_owner', 'accounting_office_users.id_user', 'data_owner.id_owner')
   }
 
+  async findVerifyID (idUser: string) {
+    return await
+    dbActions('accounting_office_users')
+      .where('id_user', idUser)
+      .select('id_user')
+  }
+
   async findMailPassword (email: string) {
     return await dbActions('accounting_office_users')
       .where('email', email)
