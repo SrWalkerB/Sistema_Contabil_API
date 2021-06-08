@@ -11,4 +11,9 @@ export default new class CompanyDataRepository {
       id_address: data.idAddress
     })
   }
+
+  async findCompanyResponsible (idResponsible: string) {
+    return await dbActions('data_company')
+      .where('id_responsible', idResponsible)
+  }
 }()

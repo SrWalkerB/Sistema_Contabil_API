@@ -30,7 +30,7 @@ export default new class AccountingOfficeUsers {
       .select('type')
   }
 
-  async findMailPassword (email: string) {
+  async findMail (email: string) {
     return await dbActions('accounting_office_users')
       .where('email', email)
       .select('id_user')

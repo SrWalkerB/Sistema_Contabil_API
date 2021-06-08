@@ -3,7 +3,7 @@ import TokenOptions from '../../helpers/TokenOptions'
 import CreateUsersEmployeesControllers from '../../useCases/Admin/CreateUsersEmployees/CreateUsersEmployeesControllers'
 
 export default new class CreateUsersEmployees {
-  store (request: Request, response: Response) {
+  async store (request: Request, response: Response) {
     try {
       const token = TokenOptions.getToken(request)
       const {
@@ -12,12 +12,18 @@ export default new class CreateUsersEmployees {
         email,
         password
       } = request.body
-      const data = CreateUsersEmployeesControllers.store(token!, {
+
+      const data = await CreateUsersEmployeesControllers.store(token!, {
         name,
         username,
         email,
         password
       })
+
+      if (data.message !== 'success') {
+        return response.status(422).json({ message: data.message })
+      }
+
       return response.status(201).json(data)
     } catch (error) {
       console.error(error)
