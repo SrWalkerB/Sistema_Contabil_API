@@ -27,6 +27,7 @@ export default new class AccountingOfficeUsers {
     dbActions('accounting_office_users')
       .where('id_user', idUser)
       .select('id_user')
+      .select('type')
   }
 
   async findMailPassword (email: string) {
