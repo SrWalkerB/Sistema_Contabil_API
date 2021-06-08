@@ -4,7 +4,7 @@ import AccountingOfficeUsersRepository from '../../repositories/AccountingOffice
 
 export default new class LoginSystemControllers {
   async auth (email: string, password: string) {
-    const searchUser = await AccountingOfficeUsersRepository.findMailPassword(email)
+    const searchUser = await AccountingOfficeUsersRepository.findMail(email)
 
     if (!searchUser.length) {
       return { message: 'user not found' }
