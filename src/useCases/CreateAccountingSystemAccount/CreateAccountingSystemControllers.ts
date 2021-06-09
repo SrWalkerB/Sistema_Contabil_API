@@ -3,13 +3,21 @@ import Cryptografia from '../../helpers/Cryptografia'
 import AccountingOfficeUsersRepository from '../../repositories/AccountingOfficeUsersData/AccountingOfficeUsersRepository'
 import AddressDataRepository from '../../repositories/AddressData/AddressDataRepository'
 import CompanyDataRepository from '../../repositories/CompanyData/CompanyDataRepository'
+import EmployeesRepository from '../../repositories/EmployeesData/EmployeesRepository'
 import OwnerDataRepository from '../../repositories/OwnerData/OwnerDataRepository'
 import { ICreateAccountingSystemDTO } from './ICreateAccountingSystemDTO'
 
 export default new class CreateAccountingSystemControllers {
   async store (data: ICreateAccountingSystemDTO) {
+    const searchMail = await AccountingOfficeUsersRepository.findMail(data.createAccountingClient.email)
+
+    if (searchMail.length) {
+      return { message: 'email already created' }
+    }
+
     const officeUsers = {
       idUser: uuidv4(),
+      idEmployee: uuidv4(),
       name: data.createAccountingClient.name,
       username: data.createAccountingClient.username,
       cpf: data.createAccountingClient.cpf,
@@ -85,6 +93,12 @@ export default new class CreateAccountingSystemControllers {
         idResponsible: officeUsers.idUser,
         idAddress: company.idAddress
       })
+
+    await EmployeesRepository.store({
+      idEmployees: officeUsers.idEmployee,
+      idCompany: company.idCompany,
+      idUser: officeUsers.idUser
+    })
 
     return {
       message: 'success',
