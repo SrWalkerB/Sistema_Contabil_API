@@ -1,6 +1,6 @@
 
 interface ICreateCompanyClient {
-    name: string,
+    nameClient: string,
     cpf: number,
     nameCompany: string,
     corporateName: string,

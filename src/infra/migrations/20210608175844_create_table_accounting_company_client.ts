@@ -17,10 +17,6 @@ export async function up (knex: Knex): Promise<void> {
       .unique()
       .notNullable()
 
-    table.string('id_address')
-      .references('id_address')
-      .inTable('address')
-
     table.string('phone', 11)
 
     table.string('email')

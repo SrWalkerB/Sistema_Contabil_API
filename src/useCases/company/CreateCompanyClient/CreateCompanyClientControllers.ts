@@ -2,6 +2,7 @@ import { parse } from 'date-fns'
 import { v4 as uuidv4 } from 'uuid'
 import TokenOptions from '../../../helpers/TokenOptions'
 import CompanyClientRepository from '../../../repositories/AccountingCompanyClientData/CompanyClientRepository'
+import CompanyResponsibleClientRepository from '../../../repositories/CompanyResponsibleClient/CompanyResponsibleClientRepository'
 import EmployeesRepository from '../../../repositories/EmployeesData/EmployeesRepository'
 import { ICreateCompanyClient } from './ICreateCompanyClient'
 
@@ -15,15 +16,15 @@ export default new class CreateCompanyClientControllers {
       return { message: 'company already create' }
     }
 
-    /* const userResponsible = {
+    const userResponsible = {
       idResponsibleClient: uuidv4(),
-      name: data.name,
+      name: data.nameClient,
       cpf: data.cpf
-    } */
+    }
 
     const company = {
       idUser: uuidv4(),
-      idResponsible: uuidv4(),
+      idResponsible: userResponsible.idResponsibleClient,
       idCompanyResponsible: idCompanyResponsible,
       idAddress: '',
       name: data.nameCompany,
@@ -39,23 +40,31 @@ export default new class CreateCompanyClientControllers {
       email: data.email
     }
 
-    /* await CompanyClientRepository.store({
-      idCompany: company.idUser,
-      idAdresss: company.idAddress,
-      idCompanyResponsible: company.idCompanyResponsible,
-      beginDate: company.beginDate,
-      cnaePrimary: company.cnaePrimary,
-      cnaeSecudary: company.cnaeSecudary,
-      cnpj: company.cnpj,
-      corporateName: company.corporateName,
-      email: company.email,
-      idResponsible: company.idResponsible,
-      legalNatural: company.legalNatural,
-      municipalRegistry: company.municipalRegistry,
-      name: company.name,
-      phone: company.phone,
-      stateRegistry: company.stateRegistry
-    }) */
+    await CompanyResponsibleClientRepository
+      .store({
+        idResponsibleClient: userResponsible.idResponsibleClient,
+        cpf: userResponsible.cpf,
+        name: userResponsible.name
+      })
+
+    await CompanyClientRepository
+      .store({
+        idCompany: company.idUser,
+        idAdresss: company.idAddress,
+        idCompanyResponsible: company.idCompanyResponsible,
+        beginDate: company.beginDate,
+        cnaePrimary: company.cnaePrimary,
+        cnaeSecudary: company.cnaeSecudary,
+        cnpj: company.cnpj,
+        corporateName: company.corporateName,
+        email: company.email,
+        idResponsible: company.idResponsible,
+        legalNatural: company.legalNatural,
+        municipalRegistry: company.municipalRegistry,
+        name: company.name,
+        phone: company.phone,
+        stateRegistry: company.stateRegistry
+      })
 
     return { message: 'success', body: company }
   }

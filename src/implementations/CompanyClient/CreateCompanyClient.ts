@@ -18,12 +18,12 @@ export default new class CreateCompanyClient {
         beginDate,
         cnaePrimary,
         cnaeSecundary,
-        name,
+        nameClient,
         cpf
       } = request.body
 
       const data = await CreateCompanyClientControllers.store(token!, {
-        name,
+        nameClient,
         cpf,
         nameCompany,
         corporateName,
