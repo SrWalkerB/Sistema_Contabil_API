@@ -4,11 +4,11 @@ import { body, validationResult } from 'express-validator'
 
 const ValidatorCreateCompanyClient = () => {
   return [
-    body('name_company')
+    body('nameCompany')
       .isLength({ min: 3, max: 60 })
-      .withMessage('name need has min: 3 and max: 60'),
+      .withMessage('nameCompany need has min: 3 and max: 60'),
 
-    body('corporate_name')
+    body('corporateName')
       .isLength({ min: 3, max: 120 })
       .withMessage('corporate_name need has min: 3 and max: 120'),
 
@@ -30,34 +30,34 @@ const ValidatorCreateCompanyClient = () => {
       .isEmail()
       .withMessage('email invalid'),
 
-    body('state_registry')
+    body('stateRegistry')
       .isNumeric()
       .isLength({ min: 15, max: 15 })
       .withMessage('state_registry need has 15 length'),
 
-    body('municipal_registry')
+    body('municipalRegistry')
       .isNumeric()
       .isLength({ min: 15, max: 15 })
       .withMessage('municipal_registry need has 15 length'),
 
-    body('legal_natural')
+    body('legalNatural')
       .isNumeric()
       .isLength({ min: 4, max: 4 })
       .withMessage('legal_natural has need 4 length'),
 
-    body('begin_date')
+    body('beginDate')
       .custom((value) => {
         const result = isValid(parse(value, 'dd/MM/yyyy', new Date()))
         return !!result
       })
       .withMessage('invalid_date'),
 
-    body('cnae_primary')
+    body('cnaePrimary')
       .isNumeric()
       .isLength({ min: 7, max: 7 })
       .withMessage('cnae_primary need has 7 length'),
 
-    body('cnae_secundary')
+    body('cnaeSecundary')
       .isNumeric()
       .isLength({ min: 7, max: 7 })
       .withMessage('cnae_secundary need has 7 length')
