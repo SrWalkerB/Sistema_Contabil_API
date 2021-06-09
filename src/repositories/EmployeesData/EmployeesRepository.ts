@@ -10,4 +10,10 @@ export default new class EmployeesRepository {
         id_user: data.idUser
       })
   }
+
+  async findUserCompany (idUser: string) {
+    return await dbActions('employees')
+      .where('id_user', idUser)
+      .select('id_company')
+  }
 }()
