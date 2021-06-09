@@ -7,10 +7,10 @@ interface ICreateCompanyClient {
     cnpj: number,
     phone: number,
     email: string,
-    stateRegistry: string,
-    municipalRegistry: string,
-    legalNatural: string,
-    beginDate: Date,
+    stateRegistry: number,
+    municipalRegistry: number,
+    legalNatural: number,
+    beginDate: string,
     cnaePrimary: number,
     cnaeSecundary: number
 }

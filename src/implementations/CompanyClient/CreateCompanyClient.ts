@@ -1,8 +1,10 @@
 import { Request, Response } from 'express'
+import TokenOptions from '../../helpers/TokenOptions'
 import CreateCompanyClientControllers from '../../useCases/company/CreateCompanyClient/CreateCompanyClientControllers'
 
 export default new class CreateCompanyClient {
-  store (request: Request, response: Response) {
+  async store (request: Request, response: Response) {
+    const token = TokenOptions.getToken(request)
     try {
       const {
         nameCompany,
@@ -20,7 +22,7 @@ export default new class CreateCompanyClient {
         cpf
       } = request.body
 
-      const data = CreateCompanyClientControllers.store({
+      const data = await CreateCompanyClientControllers.store(token!, {
         name,
         cpf,
         nameCompany,
@@ -36,7 +38,11 @@ export default new class CreateCompanyClient {
         cnaeSecundary
       })
 
-      return response.status(201).json(data.message)
+      if (data.message !== 'success') {
+        return response.status(422).json({ message: data.message })
+      }
+
+      return response.status(201).json(data)
     } catch (error) {
       console.error(error)
       return response.status(500).json({ message: 'error not expect' })
