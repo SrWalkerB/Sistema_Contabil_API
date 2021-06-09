@@ -9,20 +9,14 @@ import { ICreateAccountingSystemDTO } from './ICreateAccountingSystemDTO'
 
 export default new class CreateAccountingSystemControllers {
   async store (data: ICreateAccountingSystemDTO) {
-    const searchMail = await AccountingOfficeUsersRepository.findMail(data.createAccountingClient.email)
-    const searchUsername = await AccountingOfficeUsersRepository.findUsername(data.createAccountingClient.username)
-    const searchCnpj = await CompanyDataRepository.findCnpj(data.createAccountingCompany.cnpj)
+    const searchFields = await this.searchFieldStore(
+      data.createAccountingClient.email,
+      data.createAccountingClient.username,
+      data.createAccountingCompany.cnpj
+    )
 
-    if (searchMail.length) {
-      return { message: 'email already created' }
-    }
-
-    if (searchUsername.length) {
-      return { message: 'username already created' }
-    }
-
-    if (searchCnpj.length) {
-      return { message: 'cnpj already created' }
+    if (searchFields) {
+      return { message: searchFields }
     }
 
     const officeUsers = {
@@ -118,6 +112,32 @@ export default new class CreateAccountingSystemControllers {
         owner,
         company
       ]
+    }
+  }
+
+  private async searchFieldStore (email: string, username: string, cnpj: number) {
+    const searchMail = await AccountingOfficeUsersRepository.findMail(email)
+    const searchUsername = await AccountingOfficeUsersRepository.findUsername(username)
+    const searchCnpj = await CompanyDataRepository.findCnpj(cnpj)
+    const erros = []
+
+    if (searchMail.length) {
+      erros.push('email already created')
+    }
+
+    if (searchUsername.length) {
+      erros.push('username already created')
+    }
+
+    if (searchCnpj.length) {
+      erros.push('cnpj already created')
+    }
+
+    if (erros.length) {
+      return {
+        message: `You have ${erros.length} errors`,
+        body: erros
+      }
     }
   }
 }()
