@@ -12,7 +12,7 @@ export default new class EmployeesRepository {
   }
 
   async findIdCompany (idUser: string) {
-    return await dbActions('emplyees')
+    return await dbActions('employees')
       .where('id_user', idUser)
       .select('id_company')
   }
