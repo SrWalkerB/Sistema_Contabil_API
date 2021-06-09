@@ -3,13 +3,25 @@ import Cryptografia from '../../helpers/Cryptografia'
 import AccountingOfficeUsersRepository from '../../repositories/AccountingOfficeUsersData/AccountingOfficeUsersRepository'
 import AddressDataRepository from '../../repositories/AddressData/AddressDataRepository'
 import CompanyDataRepository from '../../repositories/CompanyData/CompanyDataRepository'
+import EmployeesRepository from '../../repositories/EmployeesData/EmployeesRepository'
 import OwnerDataRepository from '../../repositories/OwnerData/OwnerDataRepository'
 import { ICreateAccountingSystemDTO } from './ICreateAccountingSystemDTO'
 
 export default new class CreateAccountingSystemControllers {
   async store (data: ICreateAccountingSystemDTO) {
+    const searchFields = await this.searchFieldStore(
+      data.createAccountingClient.email,
+      data.createAccountingClient.username,
+      data.createAccountingCompany.cnpj
+    )
+
+    if (searchFields) {
+      return { message: searchFields }
+    }
+
     const officeUsers = {
       idUser: uuidv4(),
+      idEmployee: uuidv4(),
       name: data.createAccountingClient.name,
       username: data.createAccountingClient.username,
       cpf: data.createAccountingClient.cpf,
@@ -86,6 +98,12 @@ export default new class CreateAccountingSystemControllers {
         idAddress: company.idAddress
       })
 
+    await EmployeesRepository.store({
+      idEmployees: officeUsers.idEmployee,
+      idCompany: company.idCompany,
+      idUser: officeUsers.idUser
+    })
+
     return {
       message: 'success',
       body: [
@@ -94,6 +112,32 @@ export default new class CreateAccountingSystemControllers {
         owner,
         company
       ]
+    }
+  }
+
+  private async searchFieldStore (email: string, username: string, cnpj: number) {
+    const searchMail = await AccountingOfficeUsersRepository.findMail(email)
+    const searchUsername = await AccountingOfficeUsersRepository.findUsername(username)
+    const searchCnpj = await CompanyDataRepository.findCnpj(cnpj)
+    const erros = []
+
+    if (searchMail.length) {
+      erros.push('email already created')
+    }
+
+    if (searchUsername.length) {
+      erros.push('username already created')
+    }
+
+    if (searchCnpj.length) {
+      erros.push('cnpj already created')
+    }
+
+    if (erros.length) {
+      return {
+        message: `You have ${erros.length} errors`,
+        body: erros
+      }
     }
   }
 }()

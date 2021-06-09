@@ -64,6 +64,10 @@ export default new class AccountingSystemUsers {
         }
       })
 
+      if (createAccount.message !== 'success') {
+        return resp.status(422).json(createAccount.message)
+      }
+
       return resp.status(201).json(createAccount)
     } catch (error) {
       console.log(error)
