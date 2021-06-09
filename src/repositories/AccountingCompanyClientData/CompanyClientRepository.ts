@@ -6,6 +6,7 @@ export default new class CompanyClientRepository {
     return await dbActions('accounting_company_client').insert({
       id_company: data.idCompany,
       id_responsible: data.idResponsible,
+      id_accounting_company: data.idCompanyResponsible,
       name: data.name,
       corporate_name: data.corporateName,
       cnpj: data.cnpj,

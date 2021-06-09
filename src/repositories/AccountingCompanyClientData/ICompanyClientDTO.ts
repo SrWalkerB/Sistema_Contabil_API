@@ -1,6 +1,8 @@
 
 interface ICreateCompanyClientDTO{
     idCompany: string,
+    idResponsible: string,
+    idCompanyResponsible: string,
     name: string,
     corporateName: string,
     cnpj: number,
@@ -13,7 +15,6 @@ interface ICreateCompanyClientDTO{
     beginDate: Date,
     cnaePrimary: number,
     cnaeSecudary: number,
-    idResponsible: string
 }
 
 export {
