@@ -20,7 +20,6 @@ export async function up (knex: Knex): Promise<void> {
     table.string('id_address')
       .references('id_address')
       .inTable('address')
-      .notNullable()
 
     table.string('phone', 11)
 
