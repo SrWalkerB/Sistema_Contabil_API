@@ -26,7 +26,6 @@ export default new class CreateCompanyClientControllers {
       idUser: uuidv4(),
       idResponsible: userResponsible.idResponsibleClient,
       idCompanyResponsible: idCompanyResponsible,
-      idAddress: '',
       name: data.nameCompany,
       corporateName: data.corporateName,
       phone: data.phone,
@@ -50,7 +49,6 @@ export default new class CreateCompanyClientControllers {
     await CompanyClientRepository
       .store({
         idCompany: company.idUser,
-        idAdresss: company.idAddress,
         idCompanyResponsible: company.idCompanyResponsible,
         beginDate: company.beginDate,
         cnaePrimary: company.cnaePrimary,

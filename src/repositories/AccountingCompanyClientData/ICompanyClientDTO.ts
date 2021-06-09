@@ -1,4 +1,3 @@
-
 interface ICreateCompanyClientDTO{
     idCompany: string,
     idResponsible: string,
@@ -6,7 +5,6 @@ interface ICreateCompanyClientDTO{
     name: string,
     corporateName: string,
     cnpj: number,
-    idAdresss?: string,
     phone: number,
     email: string,
     stateRegistry: number,

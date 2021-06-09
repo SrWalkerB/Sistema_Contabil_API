@@ -10,7 +10,6 @@ export default new class CompanyClientRepository {
       name: data.name,
       corporate_name: data.corporateName,
       cnpj: data.cnpj,
-      id_address: data.idAdresss,
       phone: data.phone,
       email: data.email,
       state_registry: data.stateRegistry,
