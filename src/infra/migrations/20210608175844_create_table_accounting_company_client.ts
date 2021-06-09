@@ -48,6 +48,11 @@ export async function up (knex: Knex): Promise<void> {
       .inTable('company_responsible_client')
       .notNullable()
 
+    table.string('id_accounting_company')
+      .references('id_company')
+      .inTable('data_company')
+      .notNullable()
+
     table.timestamp('created_at')
       .defaultTo(dbActions.fn.now())
       .notNullable()
