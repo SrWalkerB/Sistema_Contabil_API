@@ -36,4 +36,10 @@ export default new class AccountingOfficeUsers {
       .select('id_user')
       .select('password')
   }
+
+  async findUsername (username: string) {
+    return await dbActions('accounting_office_users')
+      .where('username', username)
+      .select('username')
+  }
 }()

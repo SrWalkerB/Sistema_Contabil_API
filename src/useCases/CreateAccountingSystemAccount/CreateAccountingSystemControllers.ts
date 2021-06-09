@@ -10,9 +10,14 @@ import { ICreateAccountingSystemDTO } from './ICreateAccountingSystemDTO'
 export default new class CreateAccountingSystemControllers {
   async store (data: ICreateAccountingSystemDTO) {
     const searchMail = await AccountingOfficeUsersRepository.findMail(data.createAccountingClient.email)
+    const searchUsername = await AccountingOfficeUsersRepository.findUsername(data.createAccountingClient.username)
 
     if (searchMail.length) {
       return { message: 'email already created' }
+    }
+
+    if (searchUsername.length) {
+      return { message: 'username already created' }
     }
 
     const officeUsers = {
