@@ -16,4 +16,9 @@ export default new class CompanyDataRepository {
     return await dbActions('data_company')
       .where('id_responsible', idResponsible)
   }
+
+  async findCnpj (cnpj: number) {
+    return await dbActions('data_company')
+      .where('cnpj', cnpj)
+  }
 }()

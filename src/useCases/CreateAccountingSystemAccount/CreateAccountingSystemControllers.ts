@@ -11,6 +11,7 @@ export default new class CreateAccountingSystemControllers {
   async store (data: ICreateAccountingSystemDTO) {
     const searchMail = await AccountingOfficeUsersRepository.findMail(data.createAccountingClient.email)
     const searchUsername = await AccountingOfficeUsersRepository.findUsername(data.createAccountingClient.username)
+    const searchCnpj = await CompanyDataRepository.findCnpj(data.createAccountingCompany.cnpj)
 
     if (searchMail.length) {
       return { message: 'email already created' }
@@ -18,6 +19,10 @@ export default new class CreateAccountingSystemControllers {
 
     if (searchUsername.length) {
       return { message: 'username already created' }
+    }
+
+    if (searchCnpj.length) {
+      return { message: 'cnpj already created' }
     }
 
     const officeUsers = {
